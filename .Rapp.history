@@ -46,17 +46,81 @@ install.packages("xlsx")
 install.packages("XML")
 install.packages("jsonlite")
 q()
-getwd()
-ls()
-ls()
-?ls
-?read.table
-TestData <- read.table("/UCI HAR Dataset/Test/X_test.txt")
+dim(TestData)
 TestData <- read.table("UCI HAR Dataset/Test/X_test.txt")
-Head(TestData)
-Heads(TestData)
-head(TestData)
-str(TestData)
+dim(TestData)
+names(TestData)
+library(reshape2)
+names(TestData[4:10])
+?melt
+TestActID <- read.table("UCI HAR Dataset/test/Y_test.txt")
+dim(TestActID)
+TestSubID <- read.table("UCI HAR Dataset/test/subject_test.txt")
+dim(TestSubID)
+?merge
+?rbind
+TestData <- read.table("UCI HAR Dataset/test/X_test.txt")
+TestSubID <- read.table("UCI HAR Dataset/test/subject_test.txt")
+TestData$subjectID <- TestSubID  ## add $subjectID to TestData
+TestActID <- read.table("UCI HAR Dataset/test/Y_test.txt")
+TestData$ActID <- TestActID  ## add $ActID to TestData
+dim(TestData)
+names(TestData)
+TrainData <- read.table("UCI HAR Dataset/train/X_train.txt")
+TrainSubID <- read.table("UCI HAR Dataset/train/subject_train.txt")
+TrainData$subjectID <- TrainSubID  ## add $subjectID to TrainData
+TrainActID <- read.table("UCI HAR Dataset/train/Y_train.txt")
+TrainData$ActID <- TrainActID  ## add $ActID to TrainData
+dim(TrainData)
+dim(TestData)
+DataM <- merge(TestData,TrainData,by = "subjectID")
+DataB <- Rbind(TestData,TrainData)
+DataB <- rbind(TestData,TrainData)
+head(DataM)
+head(DataB)
+Data <- merge(TestData,TrainData,by.x = "subjectID")
+Data <- merge(TestData,TrainData,by.x = "subjectID", by.y = "subjectID")
+Data <- merge(TestData,TrainData)
+?merge
+head(Data)
+Data <- merge(TestData,TrainData, all = TRUE, sort = FALSE)
+?row.names
+row.names(TestData)
+intersect(names(TestData), names(TrainData))
+Data <- merge(TestData,TrainData, sort = FALSE)
+dim(TrainData)
+dim(TestData)
+row.names(TestData)
+row.names(TrainData)
 summary(TestData)
-40*17
-40*16
+str(TestData)
+str(TrainData)
+?rbind
+Data <- TestData
+Data <- TrainData
+rbind(TrainData,TestData)
+dim(TestSubID)
+dim(TrainData)
+row.names(TrainData$ActID)
+str(TestData$subjectID)
+TestSubID <- read.table("UCI HAR Dataset/test/subject_test.txt")
+cbind(TestData,TestSubID)  ## add $subjectID to TestData
+TestSubID <- read.table("UCI HAR Dataset/test/subject_test.txt")
+TestData <- read.table("UCI HAR Dataset/test/X_test.txt")
+TestSubID <- read.table("UCI HAR Dataset/test/subject_test.txt")
+TestData <- cbind(TestData,TestSubID)  ## add $subjectID to TestData
+dim(TestData)
+head(TestData)
+TestActID <- read.table("UCI HAR Dataset/test/Y_test.txt")
+TestData <- cbind(TestData,TestActID)  ## add $ActID to TestData
+dim(TestData)
+TrainData <- read.table("UCI HAR Dataset/train/X_train.txt")
+TrainSubID <- read.table("UCI HAR Dataset/train/subject_train.txt")
+TrainData <- cbind(TrainData,TrainSubID)  ## add $subjectID to TrainData
+TrainActID <- read.table("UCI HAR Dataset/train/Y_train.txt")
+TrainData <- cbind(TrainData,TrainActID)  ## add $ActID to TrainData
+dim(TrainData)
+Data <- rbind(TrainData,TestData)
+DataM <- merge(TestData,TrainData)
+dim(Data)
+names(Data)

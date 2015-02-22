@@ -75,5 +75,7 @@ Data.narrow <- melt(Data.tidy, id.vars = c("subject","activity"), measure.vars =
 ##	5	From the data set in step 4, creates a second, independent tidy data set with the average of each 
 ##		variable for each activity and each subject.
 ResultTidyData <- dcast(Data.narrow,subject + activity ~ variable,fun.aggregate = mean)
-ResultTidyData
 dim(ResultTidyData)
+write.table(ResultTidyData,file = "ResultTidyData.txt", row.name = FALSE)
+
+
